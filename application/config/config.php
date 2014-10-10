@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url'] = 'http://localhost:8888/favooru-tienda/';
+$config['base_url'] = 'http://127.0.1.1:82/';
 
 /*
 |--------------------------------------------------------------------------

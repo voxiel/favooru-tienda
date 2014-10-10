@@ -1,4 +1,6 @@
-/A3M.komodoproject
-#Ignore log files of any kind
-log-*.php
-
+*/config/config.php
+*/config/database.php
+*/logs/log-*.php
+*/logs/!index.html
+*/cache/*
+*/cache/!index.html
