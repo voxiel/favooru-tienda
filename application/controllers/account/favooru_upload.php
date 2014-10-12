@@ -48,6 +48,7 @@ class favooru_upload extends CI_Controller {
 
     // Load manage users view
     $this->load->view('account/favooru_upload', $data);
+    
   }
 
   

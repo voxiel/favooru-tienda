@@ -3,6 +3,46 @@
 <head>
   <?php echo $this->load->view('head', array('title' => lang('product_page_name'))); ?>
 </head>
+<script type="text/javascript">
+
+    $(document).on('ready', function() {
+      $('#upload_form').on('submit', function(e){
+        //recibe un objeto de json con las configuraciones y propiedades
+
+        e.preventDefault(); //evita que el formulario recarge la pagina 
+        var url = '<?php echo site_url("/upload/do_upload");?>';
+        data: $('#upload_form').serialize,
+        console.log('base: '+ url);
+        $.ajax({
+          //url: base_url +'index.php/upload/do_upload',
+          url: url,
+          type:'POST',
+          success: function(info){  //funcion que se ejecutara cuando el servidor de una respuesta
+            console.log(info);      //info son los datos que devuelve el servidor
+          },
+          error: function(jqXHR, estado, error){ //en caso de error, se ejecuta esto 
+            console.log(error);
+            console.log(estado);
+          },
+          complete: function(jqXHR, estado){ //siempre se ejecuta independientemente si fue un success o error 
+              console.log(estado);
+          },
+          timeout: 10000 //tiempo maximo de espera por la peticion
+        }); 
+      });//del form 
+      
+   
+      /*$('#upload_form').bind('submit', function(event) {
+        $.post($('#upload_form').attr('action'), $('#upload_form').serialize(), function( data ) {
+                console.log(data);
+        }, 'json');
+        return false;           
+        });
+      */  
+    });//del document ready
+
+
+</script>
 <body>
 
 <?php echo $this->load->view('header'); ?>
@@ -13,19 +53,20 @@
     <div class="span2">
       <?php echo $this->load->view('account/account_menu', array('current' => 'manage_cargar_datos')); ?>
     </div>
-
+  
     <div class="span10">
-
       <h2>Cargar Datos de Tigo Money</h2>
+
+      <div class="alert alert-success" role="alert"> Archivo guardado con exito! </div>
 
       <div class="well">
         Seleccionar el archivo *.csv provisto por Tigo Money
       </div>
       <!--<?php echo $error;?>-->
 
-	<?php echo form_open_multipart('upload/do_upload');?>
+	<?php echo form_open_multipart('upload/do_upload', 'id="upload_form"');?>
 
-	<input type="file" name="userfile" size="20" />
+	<input type="file" name="userfile" size="20"/>
 
 	<br /><br />
 
