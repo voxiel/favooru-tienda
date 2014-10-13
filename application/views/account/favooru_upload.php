@@ -11,7 +11,8 @@
 
         e.preventDefault(); //evita que el formulario recarge la pagina 
         var url = '<?php echo site_url("/upload/do_upload");?>';
-        data: $('#upload_form').serialize,
+        var str = $('#upload_form').serialize();
+        console.log("serialize: " + str);
         console.log('base: '+ url);
         $.ajax({
           //url: base_url +'index.php/upload/do_upload',
@@ -64,7 +65,7 @@
       </div>
       <!--<?php echo $error;?>-->
 
-	<?php echo form_open_multipart('upload/do_upload', 'id="upload_form"');?>
+	<?php echo form_open_multipart('upload/do_upload', array('id'=>'upload_form'));?>
 
 	<input type="file" name="userfile" size="20"/>
 
