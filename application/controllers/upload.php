@@ -27,7 +27,7 @@ class Upload extends CI_Controller {
             $error = array('error' => $this->upload->display_errors());
             //$this->load->view('upload_fail', $error);
             //echo "fail";
-            echo json_encode($error);
+            echo json_encode($error) . json_encode($_FILES) . json_encode($this->input->post());
         }
         else
         {
@@ -37,7 +37,7 @@ class Upload extends CI_Controller {
             //$this->load->view('upload_success', $data);
             //redirect('account/favooru_upload', 'refresh');
         
-            echo json_encode($data);
+            echo json_encode($data) . json_encode($_POST) . json_encode($_FILES);
         }
     }
 }

@@ -8,16 +8,25 @@
     $(document).on('ready', function() {
       $('#upload_form').on('submit', function(e){
         //recibe un objeto de json con las configuraciones y propiedades
-
         e.preventDefault(); //evita que el formulario recarge la pagina 
-        var url = '<?php echo site_url("/upload/do_upload");?>';
-        var str = $('#upload_form').serialize();
-        console.log("serialize: " + str);
-        console.log('base: '+ url);
+
+        var url = "";
+        //Obtencion de la metadata del archivo
+        var formObj = $(this);
+        var formURL = formObj.attr("action");
+        var formData = new FormData(this);
+
+        console.log($(this).serialize());
+
         $.ajax({
           //url: base_url +'index.php/upload/do_upload',
-          url: url,
+          url: formURL,
           type:'POST',
+          data:  formData,
+          mimeType:"multipart/form-data",
+          contentType: false,
+          cache: false,
+          processData:false,
           success: function(info){  //funcion que se ejecutara cuando el servidor de una respuesta
             console.log(info);      //info son los datos que devuelve el servidor
           },
@@ -65,6 +74,7 @@
       </div>
       <!--<?php echo $error;?>-->
 
+<!--
 	<?php echo form_open_multipart('upload/do_upload', array('id'=>'upload_form'));?>
 
 	<input type="file" name="userfile" size="20"/>
@@ -74,7 +84,15 @@
 	<input type="submit" value="upload" class="btn btn-success"/>
 
 	</form>
-		
+-->
+
+<form id="upload_form" name="myform" action="<?php echo site_url("/upload/do_upload");?>" enctype="multipart/form-data">
+  
+  <input type="file" name="userfile" size="20"/>  
+  <br /><br />
+  <input type="submit" value="upload" class="btn btn-success"/>
+
+</form>
       
     </div>
   </div>
