@@ -5,12 +5,11 @@ class Upload extends CI_Controller {
     function __construct()
     {
         parent::__construct();
-        $this->load->helper(array('form', 'url'));
+        $this->load->helper(array('form', 'url', 'file'));
     }
 
     function index()
     {
-        //$this->load->view('account_favooru_upload', array('error' => ' ' ));
         $this->load->view('account/favooru_upload', array('error' => ' ' ));
     }
 
@@ -25,19 +24,16 @@ class Upload extends CI_Controller {
         if (  !$this->upload->do_upload() )
         {
             $error = array('error' => $this->upload->display_errors());
-            //$this->load->view('upload_fail', $error);
-            //echo "fail";
-            echo json_encode($error) . json_encode($_FILES) . json_encode($this->input->post());
+            echo json_encode($error);
         }
         else
         {
             $data = array('upload_data' => $this->upload->data());
+            //Proceso de lectura del archivo
+            $content = read_file($data['upload_data']['full_path']);
+            echo 'contenido del archivo: ' . json_encode($content);
 
-            //$this->load->view('account/favooru_upload', $data);
-            //$this->load->view('upload_success', $data);
-            //redirect('account/favooru_upload', 'refresh');
-        
-            echo json_encode($data) . json_encode($_POST) . json_encode($_FILES);
+            //echo $data['upload_data']['full_path'] . json_encode($_POST) . json_encode($_FILES);
         }
     }
 }
