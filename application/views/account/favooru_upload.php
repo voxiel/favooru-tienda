@@ -72,6 +72,78 @@
   <input type="submit" value="upload" class="btn btn-success"/>
 </form>
 
+<table id="table-javascript"></table>
+<script>
+    $(function () {
+        $('#via-javascript-table').next().click(function () {
+            $(this).hide();
+
+            $('#table-javascript').bootstrapTable({
+                method: 'get',
+                url: 'data2.json',
+                cache: false,
+                height: 400,
+                striped: true,
+                pagination: true,
+                pageSize: 50,
+                pageList: [10, 25, 50, 100, 200],
+                search: true,
+                showColumns: true,
+                showRefresh: true,
+                minimumCountColumns: 2,
+                clickToSelect: true,
+                columns: [{
+                    field: 'state',
+                    checkbox: true
+                }, {
+                    field: 'id',
+                    title: 'Item ID',
+                    align: 'right',
+                    valign: 'bottom',
+                    sortable: true
+                }, {
+                    field: 'name',
+                    title: 'Item Name',
+                    align: 'center',
+                    valign: 'middle',
+                    sortable: true,
+                    formatter: nameFormatter
+                }, {
+                    field: 'price',
+                    title: 'Item Price',
+                    align: 'left',
+                    valign: 'top',
+                    sortable: true,
+                    formatter: priceFormatter,
+                    sorter: priceSorter
+                }, {
+                    field: 'operate',
+                    title: 'Item Operate',
+                    align: 'center',
+                    valign: 'middle',
+                    clickToSelect: false,
+                    formatter: operateFormatter,
+                    events: operateEvents
+                }]
+            });
+        });
+    });
+</script>
+      
+    </div>
+  </div>
+</div>
+
+<?php echo $this->load->view('footer'); ?>
+
+</body>
+</html>
+
+
+
+
+
+<!--
 <div class="bs-example">
   <div class="bootstrap-table">
     <div class="fixed-table-toolbar">
@@ -210,13 +282,5 @@
 </div>
 <div class="clearfix">
 </div>
-</div> <!-- del contenedor de la tabla -->
-      
-    </div>
-  </div>
-</div>
-
-<?php echo $this->load->view('footer'); ?>
-
-</body>
-</html>
+</div> -->
+<!-- del contenedor de la tabla -->
