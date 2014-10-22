@@ -72,15 +72,17 @@
   <input type="submit" value="upload" class="btn btn-success"/>
 </form>
 
+
+<button id="via-javascript-table"> tabla </button>
 <table id="table-javascript"></table>
 <script>
-    $(function () {
-        $('#via-javascript-table').next().click(function () {
+
+        $('#via-javascript-table').on('click', function () {
             $(this).hide();
 
             $('#table-javascript').bootstrapTable({
                 method: 'get',
-                url: 'data2.json',
+                url: './uploads/json/codigos_tigo.json',
                 cache: false,
                 height: 400,
                 striped: true,
@@ -96,38 +98,33 @@
                     field: 'state',
                     checkbox: true
                 }, {
-                    field: 'id',
-                    title: 'Item ID',
+                    field: 'codTransaccion',
+                    title: 'Codigo Transaccion',
                     align: 'right',
                     valign: 'bottom',
                     sortable: true
                 }, {
-                    field: 'name',
-                    title: 'Item Name',
+                    field: 'codProducto',
+                    title: 'Codigo Producto',
                     align: 'center',
                     valign: 'middle',
-                    sortable: true,
-                    formatter: nameFormatter
+                    sortable: true
                 }, {
-                    field: 'price',
-                    title: 'Item Price',
+                    field: 'fechaPago',
+                    title: 'Fecha de Pago',
                     align: 'left',
                     valign: 'top',
-                    sortable: true,
-                    formatter: priceFormatter,
-                    sorter: priceSorter
+                    sortable: true
                 }, {
-                    field: 'operate',
-                    title: 'Item Operate',
+                    field: 'codReferencia',
+                    title: 'Codigo de Referencia',
                     align: 'center',
                     valign: 'middle',
-                    clickToSelect: false,
-                    formatter: operateFormatter,
-                    events: operateEvents
+                    clickToSelect: false
                 }]
             });
         });
-    });
+
 </script>
       
     </div>
