@@ -8,8 +8,7 @@ class Account_model extends CI_Model {
 	 * @access public
 	 * @return object all accounts
 	 */
-	function get()
-	{
+	function get(){
 		return $this->db->get('a3m_account')->result();
 	}
 
@@ -20,8 +19,7 @@ class Account_model extends CI_Model {
 	 * @return object products object
 	 */
 
-	public function get_productos() 
-	{
+	public function get_productos(){
 	    return $this->db->get('favooru_producto')->result();
 	}
 
@@ -34,8 +32,7 @@ class Account_model extends CI_Model {
 	 * @param string $product_id
 	 * @return object account object
 	 */
-	function get_product_by_id($product_id)
-	{
+	function get_product_by_id($product_id){
 		return $this->db->get_where('favooru_producto', array('producto_id' => $product_id))->row();
 	}
 
@@ -47,8 +44,7 @@ class Account_model extends CI_Model {
 	 * @access public
 	 * @return object account object
 	 */
-	function get_clientes()
-	{
+	function get_clientes(){
 		return $this->db->get('favooru_clientes')->result();
 	}
 
@@ -60,8 +56,7 @@ class Account_model extends CI_Model {
 	 * @access public
 	 * @return object afiliados object
 	 */
-	function get_afiliados()
-	{
+	function get_afiliados(){
 		return $this->db->get('favooru_afiliados')->result();
 	}
 
@@ -73,8 +68,7 @@ class Account_model extends CI_Model {
 	 * @access public
 	 * @return object pedidos object
 	 */
-	function get_pedidos()
-	{
+	function get_pedidos(){
 		$this->db->select('favooru_pedidos.pedidos_id, favooru_clientes.cliente_nombres, favooru_clientes.cliente_apellidos, favooru_producto.producto_descripcion, favooru_producto.producto_precio, favooru_pedidos.pedidos_codigo, favooru_pedidos.pedido_fecha, favooru_afiliados.afiliados_nombre, favooru_pedidos.pedido_estado,');
 		$this->db->from('favooru_pedidos');
 		$this->db->join('favooru_clientes', 'favooru_pedidos.pedidos_cliente_id = favooru_clientes.cliente_id');
@@ -337,6 +331,69 @@ class Account_model extends CI_Model {
 	function remove_suspended_datetime($account_id)
 	{
 		$this->db->update('a3m_account', array('suspendedon' => NULL), array('id' => $account_id));
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * count password available
+	 *
+	 * @access public
+	 * @return object count password
+	 */
+	function count_passwords_available_by_product()
+	{
+		$passwords_available = array();
+		$all_products = $this->get_productos();
+		foreach ($all_products as $index => $product) {
+			$this->db->where('accesos_producto_id', $product->producto_id); 
+			$this->db->where('accesos_disponibilidad', 1); 
+			$this->db->from('favooru_accesos');
+		 	$count_password = $this->db->count_all_results();
+		 	array_push($passwords_available, $count_password);
+		 	array_push($passwords_available, $product->producto_descripcion);
+		}
+		//return an array with the amount passwords available by product
+		return $passwords_available;
+
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * return passwords available
+	 *
+	 * @access public
+	 * @return object count password
+	 */
+	function pending_orders(){
+		$this->db->select('ordenes_codigo_transaccion');
+		$this->db->where('ordenes_disponibilidad', 1); //true
+		$query = $this->db->get('favooru_ordenes');
+
+		$pending_orders = array();
+		foreach ($query->result() as $row)
+		{
+		    array_push($pending_orders, $row->ordenes_codigo_transaccion);
+		}
+		return $pending_orders;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * update orders
+	 *
+	 * @access public
+	 * @return object count password
+	 */
+	function process_orders($codTransaccion){
+
+		$data = array('ordenes_disponibilidad' => 0);
+		$this->db->where('ordenes_codigo_transaccion', $codTransaccion); 
+		$this->db->update('favooru_ordenes', $data);
+
+		return ($this->db->affected_rows() > 0);
 	}
 
 }
