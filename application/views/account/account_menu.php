@@ -32,6 +32,10 @@
       <li class="<?php echo ($current == 'manage_cargar_datos') ? 'active' : ''; ?>"><?php echo anchor('account/favooru_upload', 'Cargar Datos'); ?></li>
     <?php endif; ?>
 
+    <?php if ($this->authorization->is_permitted('retrieve_roles')) : ?>
+      <li class="<?php echo ($current == 'manage_cargar_accesos') ? 'active' : ''; ?>"><?php echo anchor('account/favooru_upload_access', 'Cargar Accesos'); ?></li>
+    <?php endif; ?>
+
     <!--<?php if ($this->authorization->is_permitted('retrieve_permissions')) : ?>
       <li class="<?php echo ($current == 'manage_permissions') ? 'active' : ''; ?>"><?php echo anchor('account/manage_permissions', lang('website_manage_permissions')); ?></li>
     <?php endif; ?>

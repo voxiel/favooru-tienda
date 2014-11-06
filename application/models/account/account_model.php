@@ -396,6 +396,27 @@ class Account_model extends CI_Model {
 		return ($this->db->affected_rows() > 0);
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * insert access
+	 *
+	 * @access public
+	 * @return object insert access
+	 */
+	function insert_access($codProducto, $user, $pass){
+
+		$data = array(
+		   'accesos_usuario' => $user ,
+		   'accesos_pass' => $pass ,
+		   'accesos_producto_id' => $codProducto
+		);
+
+		$this->db->insert('favooru_accesos', $data); 
+
+		return ($this->db->affected_rows() > 0);
+	}
+
 }
 
 

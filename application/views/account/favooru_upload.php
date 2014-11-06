@@ -142,6 +142,7 @@
             }
           },
           error: function(jqXHR, estado, error){ //en caso de error, se ejecuta esto 
+            console.log(jqXHR);
             console.log(error);
             console.log(estado);
             console.log('ocurrio un error al guardar');

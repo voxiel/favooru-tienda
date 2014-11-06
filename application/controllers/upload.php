@@ -167,15 +167,51 @@ class Upload extends CI_Controller {
             $not_found['num_alerts'] = count($not_found)-1;
             echo json_encode($not_found);
         }
-        
-        
-        
+    }
 
+    function upload_access(){
 
-        //print_r($response);
-        //var_export($_FILES, true);
-        //$decoded = json_decode($_GET[],true);
-        //echo $decoded;
+        $config['upload_path'] = './uploads/access';
+        $config['allowed_types'] = 'gif|jpg|png|csv|xl';
+        $config['max_size'] = '0';
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload()){
+            $response = array('error' => $this->upload->display_errors());
+            echo json_encode($response);
+        }else{
+            //Proceso de subida del archivo
+            $data = array('upload_data' => $this->upload->data());
+
+            //Proceso de lectura del archivo
+            $content_file = read_file($data['upload_data']['full_path']);
+
+            $element = preg_split("/[\s,]+/", $content_file);  //obteniedo todos los elementos del archivo como elementos de un arreglo
+            //print_r($element);
+            //itera sobre el contenido de todas las celdas
+            $i=0;
+            $data = array();
+            foreach ($element as $index => $value) {
+                //echo $index.'=>'.$value.'--';
+                $data[$i] =  (string)$value;
+                //reiniciar el indice del arreglo para verificar el 
+                if ($index%3 == 0 && $index != 0) {
+                    //echo $data[0].'-'. $data[1].'-'. $data[2].'-';
+                    $this->account_model->insert_access($data[0], $data[1],intval($data[2]));
+                    $i = 0;
+                }
+                if( $index == count($element)-2) { //Se le restan 2: porque la numeracion comienza en 0 y el ultimo elemento del arreglo esta vacio.
+                    break;
+                }
+                $i++;
+            }
+
+            $response = array('error' => false);
+            echo json_encode($response);
+        }
+
     }
 }
 ?>
+
