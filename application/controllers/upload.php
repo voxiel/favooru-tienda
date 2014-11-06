@@ -201,7 +201,7 @@ class Upload extends CI_Controller {
                     $this->account_model->insert_access($data[0], $data[1],intval($data[2]));
                     $i = 0;
                 }
-                if( $index == count($element)-2) { //Se le restan 2: porque la numeracion comienza en 0 y el ultimo elemento del arreglo esta vacio.
+                if($index == count($element)-1) { //Se le restan 2: porque la numeracion comienza en 0 y el ultimo elemento del arreglo esta vacio.
                     break;
                 }
                 $i++;
