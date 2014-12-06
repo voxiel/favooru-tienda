@@ -127,6 +127,7 @@ class Upload extends CI_Controller {
     }
 
     function process(){
+        $this->load->library('email');
 
         //obtencion de las ordenes pendientes de completar
         $orders = $this->account_model->pending_orders();
@@ -134,6 +135,7 @@ class Upload extends CI_Controller {
         //peticiones de ordenes a completar
         $data = json_decode(file_get_contents("php://input"));
         $not_found = array();
+        $access = array();
         //iteramos segun la cantidad peticiones de ordenes
         $flag = false;
         $j = 0;
@@ -143,6 +145,12 @@ class Upload extends CI_Controller {
             foreach ($orders as $index => $value) {
                 if($data[$i]->{'codTransaccion'} == $value){
                     $flag = $this->account_model->process_orders($value);
+                    $row = $this->account_model->get_id_access();
+                    $this->account_model->update_access($row[0]->{'accesos_id'}, $value);
+                    
+                    array_push($access,$row[0]->{'accesos_usuario'});
+                    array_push($access,$row[0]->{'accesos_pass'});
+
                     $j++;
                 }
             }//del foreach
@@ -152,19 +160,19 @@ class Upload extends CI_Controller {
                 /******************* enviar correo aqui ***************************/
 
 
-
-
-
                 /******************* enviar correo aqui ***************************/
             }
         }//del for
         if(count($not_found)==0){
             $not_found['error'] = false;
             $not_found['num_inserts'] = $j;
+            $not_found['access'] = $access;
+            //$not_found['mail_debug'] = $this->email->print_debugger();
             echo json_encode($not_found);
         }else{
             $not_found['error'] = true;
             $not_found['num_alerts'] = count($not_found)-1;
+            $not_found['access'] = $access;
             echo json_encode($not_found);
         }
     }
@@ -199,6 +207,61 @@ class Upload extends CI_Controller {
             echo json_encode($response);
         }
 
+    }
+
+    function send_mail(){
+        $this->load->library('email');
+        $data = json_decode(file_get_contents("php://input"));
+
+            $name = "Charlie";
+            $email_to = "xscharliexs@gmail.com";
+            $email_from = "info@favooru.com"; 
+            $subject = "Confirmación de solicitud";
+
+            $text = "
+
+            <div>
+            <table id='Table_01' width='600' height='auto' border='0' cellpadding='0' cellspacing='0' style='margin-top:5px;'>
+                    <tr>
+                    <td style='padding:15px;'>
+                        <h2 style='font-family:Helvetica, ‘Helvetica Neue’, Arial;'>GRACIAS POR PARTICIPAR, ".$name."</h2>
+                        <p style='font-family:Helvetica, ‘Helvetica Neue’, Arial; font-size:14px;'>
+                            usuario: ".$data[0]."
+                        </p>
+                        <p style='font-family:Helvetica, ‘Helvetica Neue’, Arial; font-size:14px;'>
+                            contraseña: ".$data[1]."
+                        </p>
+                    </td>
+                </tr>
+                            
+            </table>
+            </div>";
+
+
+            //configuracion para gmail
+            $configGmail = array(
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://smtp.gmail.com',
+                'smtp_port' => 465,
+                'smtp_user' => 'testingbsolutions@gmail.com',
+                'smtp_pass' => 'pajarito12',
+                'mailtype' => 'html',
+                'charset' => 'utf-8',
+                'newline' => "\r\n"
+            );    
+     
+            //cargamos la configuración para enviar con gmail
+            $this->email->initialize($configGmail);
+            
+            $this->email->from($email_from, $name);
+            $this->email->to($email_to); 
+            $this->email->subject($subject);
+            //$this->email->message('Usuario: '. $row[0]->{'accesos_usuario'} .', contraseña: '.$row[0]->{'accesos_pass'});  
+            $this->email->message($text);  
+            $this->email->send();
+
+            //echo $this->email->print_debugger();
+           print_r($data);
     }
 }
 ?>

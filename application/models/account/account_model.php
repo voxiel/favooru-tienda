@@ -417,6 +417,49 @@ class Account_model extends CI_Model {
 		return ($this->db->affected_rows() > 0);
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * get id access
+	 *
+	 * @access public
+	 * @return object get id access
+	 */
+	function get_id_access(){
+		$this->db->select('accesos_id, accesos_usuario, accesos_pass');
+		$this->db->where('accesos_disponibilidad', 1); 
+		$query = $this->db->get('favooru_accesos', 1, 0 ); //solo sacamos 1 elemento (limit = 1) 
+		return $query->result();
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * update access
+	 *
+	 * @access public
+	 * @return object get id access
+	 */
+	function update_access($accesos_id, $codTransaccion){
+
+		$data = array(
+	               'accesos_disponibilidad' => 0
+	            );
+
+		$this->db->where('accesos_id', $accesos_id);
+		$this->db->update('favooru_accesos', $data); 	
+
+		/***************************************************/
+
+		$data = array(
+	               'ordenes_id_accesos' => $accesos_id
+	            );
+
+		$this->db->where('ordenes_codigo_transaccion', $codTransaccion);
+		$this->db->update('favooru_ordenes', $data); 	
+	
+	}
+	
 }
 
 

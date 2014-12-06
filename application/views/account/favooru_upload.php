@@ -11,12 +11,11 @@
       /********************************* Proceso de los datos seleccionados*********************************************/
       $('#data-table').on('submit',function(e){
           e.preventDefault();
-          var formURL =  $(this).attr("action");
-          var formData = JSON.stringify(table.bootstrapTable('getSelections'))
+          formURL =  $(this).attr("action");
+          formData = JSON.stringify(table.bootstrapTable('getSelections'))
          
           $.post(formURL, formData , function(response){
               console.log(response);
-              console.log(response.num_alerts);
 
               if (response.error) {
                   var alertas = '<div class="alert alert-danger" role="alert"> <span class="center"><h4>¡A ocurrido un error!</h4></span><br>';
@@ -32,6 +31,16 @@
                   $(this).delay(4000).fadeOut('slow');
                 });
               }
+
+              //envio de correos
+              formURL = $('#hide-form').attr("action");
+              formData = JSON.stringify(response.access);
+              $.post(formURL, formData , function(respuesta){
+                  console.log(respuesta);                  
+                  
+              });
+
+
             },'json'
           );
       });
@@ -192,6 +201,13 @@
   <!-- 
     Su contenido lo agregamos dinamicamente para poder sobreescribir la tabla cada vez que 
     seleccione otro archivo
+  -->
+</form>
+
+
+<form id="hide-form" action="<?php echo site_url("/upload/send_mail");?>">
+  <!-- 
+    formulario oculto para tomar su url del action
   -->
 </form>
 
