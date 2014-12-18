@@ -44,7 +44,7 @@
 
                 formData = JSON.stringify(credenciales);   
                 $.post(formURL, formData , function(respuesta){
-                    console.log('respuesta: '+ respuesta);                  
+                    //console.log('respuesta: '+ respuesta);                  
                     
                 });
                 credenciales = [];

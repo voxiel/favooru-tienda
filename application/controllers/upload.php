@@ -148,11 +148,12 @@ class Upload extends CI_Controller {
                     $flag = $this->account_model->process_orders($value);
                     $row = $this->account_model->get_id_access(substr($value, 8, -6));
                     $this->account_model->update_access($row[0]->{'accesos_id'}, $value);
-                    //$data_user = $this->account_model->get_email($value, $row[0]->{'accesos_id'});
+                    $data_user = $this->account_model->get_email($value, $row[0]->{'accesos_id'});
                     
                     array_push($access,$row[0]->{'accesos_usuario'});
                     array_push($access,$row[0]->{'accesos_pass'});
-                    //array_push($access, $data_user[0]->{'cliente_nombres'});
+                    array_push($access, $data_user);
+                    //array_push($access, $data_user[0]->{'cliente_nombres'});                    
                     //array_push($access, $data_user[0]->{'cliente_apellidos'});
                     //array_push($access, $data_user[0]->{'cliente_correo'});
 

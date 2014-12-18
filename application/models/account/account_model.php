@@ -453,8 +453,10 @@ class Account_model extends CI_Model {
 		$this->db->join('favooru_pedidos','pedidos_cliente_id = cliente_id'); 
 		$this->db->where('pedidos_id_ordenes', $row[0]->{'ordenes_id'});
 
-		$query = $this->db->get(); //solo sacamos 1 elemento (limit = 1) 
+		$query = $this->db->get();
 		return $query->result();
+		//return "hola";
+		//return $row[0]->{'ordenes_id'};
 	}
 
 	// --------------------------------------------------------------------
