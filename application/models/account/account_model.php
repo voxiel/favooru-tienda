@@ -425,10 +425,35 @@ class Account_model extends CI_Model {
 	 * @access public
 	 * @return object get id access
 	 */
-	function get_id_access(){
+	function get_id_access($codProducto){
 		$this->db->select('accesos_id, accesos_usuario, accesos_pass');
 		$this->db->where('accesos_disponibilidad', 1); 
+		$this->db->where('accesos_producto_id', $codProducto); 
 		$query = $this->db->get('favooru_accesos', 1, 0 ); //solo sacamos 1 elemento (limit = 1) 
+		return $query->result();
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * get email
+	 *
+	 * @access public
+	 * @return object get email
+	 */
+	function get_email($codTransaccion, $accesoId){
+		$this->db->select('ordenes_id');
+		$this->db->where('ordenes_id_accesos', $accesoId); 
+		$this->db->where('ordenes_codigo_transaccion', $codTransaccion); 
+		$query = $this->db->get('favooru_ordenes', 1, 0 ); //solo sacamos 1 elemento (limit = 1) 
+		$row = $query->result();
+
+		$this->db->select('cliente_nombres, cliente_apellidos, cliente_correo, pedidos_id_ordenes');
+		$this->db->from('favooru_clientes'); 
+		$this->db->join('favooru_pedidos','pedidos_cliente_id = cliente_id'); 
+		$this->db->where('pedidos_id_ordenes', $row[0]->{'ordenes_id'});
+
+		$query = $this->db->get(); //solo sacamos 1 elemento (limit = 1) 
 		return $query->result();
 	}
 
@@ -465,3 +490,5 @@ class Account_model extends CI_Model {
 
 /* End of file account_model.php */
 /* Location: ./application/account/models/account_model.php */
+
+//Pendiente lo de la seleccion de contraseñas por N° de producto

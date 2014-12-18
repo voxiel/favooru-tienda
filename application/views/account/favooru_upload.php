@@ -34,12 +34,23 @@
 
               //envio de correos
               formURL = $('#hide-form').attr("action");
-              formData = JSON.stringify(response.access);
-              $.post(formURL, formData , function(respuesta){
-                  console.log(respuesta);                  
-                  
-              });
+              count = response.access.length;
+              credenciales = [];
+              console.log('**************************');
+              console.log(response.access);
+              for(var i=0; i<count; i=i+2){
+                credenciales.push(response.access[i]);
+                credenciales.push(response.access[i+1]);
 
+                formData = JSON.stringify(credenciales);   
+                $.post(formURL, formData , function(respuesta){
+                    console.log('respuesta: '+ respuesta);                  
+                    
+                });
+                credenciales = [];
+              }
+              
+//javascript:alert(document.lastmodified)
 
             },'json'
           );

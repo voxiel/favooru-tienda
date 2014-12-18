@@ -136,6 +136,7 @@ class Upload extends CI_Controller {
         $data = json_decode(file_get_contents("php://input"));
         $not_found = array();
         $access = array();
+        $users = array();
         //iteramos segun la cantidad peticiones de ordenes
         $flag = false;
         $j = 0;
@@ -145,11 +146,15 @@ class Upload extends CI_Controller {
             foreach ($orders as $index => $value) {
                 if($data[$i]->{'codTransaccion'} == $value){
                     $flag = $this->account_model->process_orders($value);
-                    $row = $this->account_model->get_id_access();
+                    $row = $this->account_model->get_id_access(substr($value, 8, -6));
                     $this->account_model->update_access($row[0]->{'accesos_id'}, $value);
+                    //$data_user = $this->account_model->get_email($value, $row[0]->{'accesos_id'});
                     
                     array_push($access,$row[0]->{'accesos_usuario'});
                     array_push($access,$row[0]->{'accesos_pass'});
+                    //array_push($access, $data_user[0]->{'cliente_nombres'});
+                    //array_push($access, $data_user[0]->{'cliente_apellidos'});
+                    //array_push($access, $data_user[0]->{'cliente_correo'});
 
                     $j++;
                 }
@@ -213,7 +218,8 @@ class Upload extends CI_Controller {
         $this->load->library('email');
         $data = json_decode(file_get_contents("php://input"));
 
-            $name = "Charlie";
+            $name = $data[2];
+            $last_name = $data[3];
             $email_to = "xscharliexs@gmail.com";
             $email_from = "info@favooru.com"; 
             $subject = "Confirmación de solicitud";
@@ -224,12 +230,15 @@ class Upload extends CI_Controller {
             <table id='Table_01' width='600' height='auto' border='0' cellpadding='0' cellspacing='0' style='margin-top:5px;'>
                     <tr>
                     <td style='padding:15px;'>
-                        <h2 style='font-family:Helvetica, ‘Helvetica Neue’, Arial;'>GRACIAS POR PARTICIPAR, ".$name."</h2>
+                        <h2 style='font-family:Helvetica, ‘Helvetica Neue’, Arial;'>GRACIAS POR PARTICIPAR, ".$name." ,".$last_name."</h2>
                         <p style='font-family:Helvetica, ‘Helvetica Neue’, Arial; font-size:14px;'>
                             usuario: ".$data[0]."
                         </p>
                         <p style='font-family:Helvetica, ‘Helvetica Neue’, Arial; font-size:14px;'>
                             contraseña: ".$data[1]."
+                        </p>
+                        <p style='font-family:Helvetica, ‘Helvetica Neue’, Arial; font-size:14px;'>
+                            correo: ".$data[4]."
                         </p>
                     </td>
                 </tr>
@@ -261,7 +270,7 @@ class Upload extends CI_Controller {
             $this->email->send();
 
             //echo $this->email->print_debugger();
-           print_r($data);
+           //print_r($data);
     }
 }
 ?>
