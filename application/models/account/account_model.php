@@ -454,9 +454,12 @@ class Account_model extends CI_Model {
 		$this->db->where('pedidos_id_ordenes', $row[0]->{'ordenes_id'});
 
 		$query = $this->db->get();
-		return $query->result();
-		//return "hola";
-		//return $row[0]->{'ordenes_id'};
+		if($this->db->affected_rows() > 0){
+			return $query->result();
+		}else {
+			return array();
+		}
+
 	}
 
 	// --------------------------------------------------------------------

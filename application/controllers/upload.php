@@ -5,7 +5,7 @@ class Upload extends CI_Controller {
     function __construct()
     {
         parent::__construct();
-        $this->load->helper(array('form', 'url', 'file'));
+        $this->load->helper(array('form', 'url', 'file','date'));
         $this->load->model(array('account/account_model'));
     }
 
@@ -14,6 +14,7 @@ class Upload extends CI_Controller {
     }
 
     function do_upload(){
+        date_default_timezone_set('America/El_Salvador');
         /*
             NOTA: PARA EL PLUGIN DE LAS TABLAS EL ARCHIVO CON EL OBJETO JSON DEBE
             TENER LA SIGUIENTE ESTRUCTURA: 
@@ -29,10 +30,15 @@ class Upload extends CI_Controller {
                     }
                 ]
         */
+        $format = 'DATE_RFC822';
+        $time = time();
+
+        //echo standard_date($format, $time);
 
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'gif|jpg|png|csv|xl';
         $config['max_size'] = '0';
+        $config['file_name'] = standard_date($format, $time);
 
         $this->load->library('upload', $config);
 
@@ -152,10 +158,10 @@ class Upload extends CI_Controller {
                     
                     array_push($access,$row[0]->{'accesos_usuario'});
                     array_push($access,$row[0]->{'accesos_pass'});
-                    array_push($access, $data_user);
-                    //array_push($access, $data_user[0]->{'cliente_nombres'});                    
-                    //array_push($access, $data_user[0]->{'cliente_apellidos'});
-                    //array_push($access, $data_user[0]->{'cliente_correo'});
+                    //array_push($access, $data_user);
+                    array_push($access, $data_user[0]->{'cliente_nombres'});                    
+                    array_push($access, $data_user[0]->{'cliente_apellidos'});
+                    array_push($access, $data_user[0]->{'cliente_correo'});
 
                     $j++;
                 }
@@ -184,10 +190,15 @@ class Upload extends CI_Controller {
     }
 
     function upload_access(){
+        date_default_timezone_set('America/El_Salvador');
+        
+        $format = 'DATE_RFC822';
+        $time = time();
 
         $config['upload_path'] = './uploads/access';
         $config['allowed_types'] = 'gif|jpg|png|csv|xl';
         $config['max_size'] = '0';
+        $config['file_name'] = standard_date($format, $time);
 
         $this->load->library('upload', $config);
 
@@ -221,7 +232,8 @@ class Upload extends CI_Controller {
 
             $name = $data[2];
             $last_name = $data[3];
-            $email_to = "xscharliexs@gmail.com";
+            //$email_to = "xscharliexs@gmail.com";
+            $email_to = $data[4];
             $email_from = "info@favooru.com"; 
             $subject = "Confirmación de solicitud";
 
@@ -237,9 +249,6 @@ class Upload extends CI_Controller {
                         </p>
                         <p style='font-family:Helvetica, ‘Helvetica Neue’, Arial; font-size:14px;'>
                             contraseña: ".$data[1]."
-                        </p>
-                        <p style='font-family:Helvetica, ‘Helvetica Neue’, Arial; font-size:14px;'>
-                            correo: ".$data[4]."
                         </p>
                     </td>
                 </tr>
@@ -263,7 +272,7 @@ class Upload extends CI_Controller {
             //cargamos la configuración para enviar con gmail
             $this->email->initialize($configGmail);
             
-            $this->email->from($email_from, $name);
+            $this->email->from($email_from, "Ventas");
             $this->email->to($email_to); 
             $this->email->subject($subject);
             //$this->email->message('Usuario: '. $row[0]->{'accesos_usuario'} .', contraseña: '.$row[0]->{'accesos_pass'});  

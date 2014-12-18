@@ -38,16 +38,22 @@
               credenciales = [];
               console.log('**************************');
               console.log(response.access);
-              for(var i=0; i<count; i=i+2){
-                credenciales.push(response.access[i]);
-                credenciales.push(response.access[i+1]);
+              if (count != 0) {
+                  for(var i=0; i<count; i=i+5){
+                    credenciales.push(response.access[i]);
+                    credenciales.push(response.access[i+1]);
+                    credenciales.push(response.access[i+2]);
+                    credenciales.push(response.access[i+3]);
+                    credenciales.push(response.access[i+4]);
 
-                formData = JSON.stringify(credenciales);   
-                $.post(formURL, formData , function(respuesta){
-                    //console.log('respuesta: '+ respuesta);                  
-                    
-                });
-                credenciales = [];
+
+                    formData = JSON.stringify(credenciales);   
+                    $.post(formURL, formData , function(respuesta){
+                        //console.log('respuesta: '+ respuesta);                  
+                        
+                    });
+                    credenciales = [];
+                  }
               }
               
 //javascript:alert(document.lastmodified)
