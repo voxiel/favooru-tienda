@@ -53,6 +53,7 @@ class favooru_get_id_afiliado extends CI_Controller {
                                          // array(1) { ["id_afiliado"]=> string(1) "2" }
 
       $data['id_afiliado'] = $params['id_afiliado'];
+      
 
     /******************************************************************************************/
 
