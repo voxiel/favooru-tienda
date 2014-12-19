@@ -21,6 +21,7 @@
     <link href="<?php echo base_url().RES_DIR; ?>/front-end/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="<?php echo base_url().RES_DIR; ?>/front-end/css/typography.css">
+    <link rel="stylesheet" href="<?php echo base_url().RES_DIR; ?>/front-end/css/animate.min.css">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -46,7 +47,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand home" id="up" href="#catalog">
+                <a class="navbar-brand home" id="up" href="#info">
                     <img alt="" src="<?php echo base_url().RES_DIR; ?>/front-end/img/logo_menu_small.png"></img>
                     <!-- <span class="light">LOGO</span> -->
                 </a>
@@ -60,7 +61,10 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#catalog">Tienda</a>
+                        <a class="page-scroll" href="<?php echo base_url()?>/index.php">Tienda</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="<?php echo base_url()?>/index.php/afiliados">Afiliados</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#download">Preguntas Frecuentes</a>
@@ -75,7 +79,7 @@
         <!-- /.container -->
     </nav>
 
-    <!-- Catalog Section -->
+    <!-- info Section -->
     <section class="info pattern-home" id="info">
       <div class="row">
           <div class="container content-section-home">
@@ -128,28 +132,28 @@
             </div>
         </div>
     </section>
-    <section>
+    <section id="how-to">
         <div class="row">
           <div class="container icons">
                 <h2 class="sec-heading white-section">¿Cómo funciona?</h2>
                 <div class="col-md-15 col-sm-4 col-xs-6">
-                    <img src="<?php echo base_url().RES_DIR; ?>/front-end/img/icons/pasos-01.png" alt="">
+                     <img class="step" src="<?php echo base_url().RES_DIR; ?>/front-end/img/icons/pasos-01.png" alt="">
                     <p class="icon-steps">1. Selecciona el producto que deseas adquirir</p>
                 </div>
                  <div class="col-md-15 col-sm-4 col-xs-6">
-                    <img src="<?php echo base_url().RES_DIR; ?>/front-end/img/icons/pasos-02.png" alt="">
+                     <img class="step" src="<?php echo base_url().RES_DIR; ?>/front-end/img/icons/pasos-02.png" alt="">
                     <p class="icon-steps">2. Ingresa tus datos y completa el formulario</p>
                 </div>
                  <div class="col-md-15 col-sm-4 col-xs-6">
-                    <img src="<?php echo base_url().RES_DIR; ?>/front-end/img/icons/pasos-03.png" alt="">
+                      <img class="step" src="<?php echo base_url().RES_DIR; ?>/front-end/img/icons/pasos-03.png" alt="">
                     <p class="icon-steps">3. Genera tu código y guárdalo en un lugar seguro</p>
                 </div>
                  <div class="col-md-15 col-sm-4 col-xs-6">
-                    <img src="<?php echo base_url().RES_DIR; ?>/front-end/img/icons/pasos-04.png" alt="">
+                    <img class="step" src="<?php echo base_url().RES_DIR; ?>/front-end/img/icons/pasos-04.png" alt="">
                     <p class="icon-steps">4. Acércate a cualquier agencia de Tigo Money, presenta tu código y realiza tu pago</p>
                 </div>
                  <div class="col-md-15 col-sm-4 col-xs-6">
-                    <img src="<?php echo base_url().RES_DIR; ?>/front-end/img/icons/pasos-05.png" alt="">
+                    <img class="step" src="<?php echo base_url().RES_DIR; ?>/front-end/img/icons/pasos-05.png" alt="">
                     <p class="icon-steps">5. Recibirás un correo electrónico con los datos para acceder a tus productos digitales</p>
                 </div>
           </div>
@@ -165,7 +169,7 @@
                               <div class="panel boxed">
                                   <div class="pro-img-box">
                                      <a href="#"  title="Clic para más info" data-toggle="modal" data-target="#producto1"><img src="<?php echo base_url().RES_DIR; ?>/front-end/img/portada_1.jpg" alt=""/></a> 
-                                      <a href="#top" title="Comprar Item" class="adtocart page-scroll">
+                                      <a href="<?php echo base_url()?>/index.php/cart" title="Comprar Item" class="adtocart">
                                           <i class="fa fa-shopping-cart"></i>
                                       </a>
                                   </div>
@@ -185,7 +189,7 @@
                               <div class="panel boxed">
                                   <div class="pro-img-box">
                                      <a href="#" title="Clic para más info" data-toggle="modal" data-target="#producto2"><img src="<?php echo base_url().RES_DIR; ?>/front-end/img/portada_2.jpg" alt=""/></a> 
-                                      <a href="#top" title="Comprar Item" class="adtocart page-scroll">
+                                      <a href="<?php echo base_url()?>/index.php/cart" title="Comprar Item" class="adtocart">
                                           <i class="fa fa-shopping-cart"></i>
                                       </a>
                                   </div>
@@ -205,7 +209,7 @@
                               <div class="panel boxed">
                                   <div class="pro-img-box">
                                      <a href="#" title="Clic para más info" data-toggle="modal" data-target="#producto3"><img src="<?php echo base_url().RES_DIR; ?>/front-end/img/portada_3.jpg" alt=""/></a> 
-                                     <a href="#top" title="Comprar Item" class="adtocart page-scroll">
+                                     <a href="<?php echo base_url()?>/index.php/cart" title="Comprar Item" class="adtocart">
                                           <i class="fa fa-shopping-cart"></i>
                                       </a>
                                   </div>
@@ -225,7 +229,7 @@
                               <div class="panel boxed">
                                   <div class="pro-img-box">
                                      <a href="#" title="Clic para más info" data-toggle="modal" data-target="#producto4"><img src="<?php echo base_url().RES_DIR; ?>/front-end/img/portada_4.jpg" alt=""/></a> 
-                                      <a href="#top" title="Comprar Item" class="adtocart page-scroll">
+                                      <a href="<?php echo base_url()?>/index.php/cart" title="Comprar Item" class="adtocart">
                                           <i class="fa fa-shopping-cart"></i>
                                       </a>
                                   </div>
@@ -245,7 +249,7 @@
                               <div class="panel boxed">
                                   <div class="pro-img-box">
                                      <a href="#" title="Clic para más info" data-toggle="modal" data-target="#producto5"><img src="<?php echo base_url().RES_DIR; ?>/front-end/img/portada_5.jpg" alt=""/></a> 
-                                      <a href="#top" title="Comprar Item" class="adtocart page-scroll">
+                                      <a href="<?php echo base_url()?>/index.php/cart" title="Comprar Item" class="adtocart">
                                           <i class="fa fa-shopping-cart"></i>
                                       </a>
                                   </div>
@@ -267,115 +271,7 @@
         </div>
     </section>
 
-    <!-- Intro Section -->
-    <section class="intro pattern" id="top">
-        <div class="intro-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
-                        <h1 class="brand-heading">Carrito de Compras</h1>
-                        <a id="try" class="home guide" href="#catalog">
-                          <div class="margin">
-                              <div class="back-text"><span>Regresar a catálogo de productos</span></div>
-                              <div class="back-icon"><i class="glyphicon glyphicon-circle-arrow-up icon-big"></i> </div>
-                              
-                          </div>
-                        </a>
-                        <p class="intro-text smargin">Selecciona el producto que quieres adquirir</p>
-                        
-                        <div class="col-md-6 nospace">
-                            <?php echo $producto;?>
-                            <a href="#cart-data" id="buy" class="btn btn-action btn-comprar page-scroll">
-                            Comprar
-                        </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Data Section -->
-    <section id="cart-data" class="pattern">
-        <div class="container content-section">
-            <div class="row">
-                <div class="col-md-6">
-                    <h2 class="heading">Adquiere tu producto</h2>
-                    <a id="try"class="page-scroll guide" href="#top">
-                        <div class="margin">
-                            <div class="back-text"><span>Regresar a selección de producto</span></div>
-                            <div class="back-icon"><i class="glyphicon glyphicon-circle-arrow-up icon-big"></i> </div>
-                            
-                        </div>
-                      </a>  
-                    
-                    <p class="description-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam repudiandae similique consequatur voluptate nisi iure totam earum ducimus asperiores accusantium quis ab eos aliquid suscipit, officia, error ipsam porro atque.</p>
-                 <?php echo form_open('tienda/save_client_data', array('id'=>'buy-form')); ?>
-                    <div class="alert alert-danger" role="alert" id="form-error"></div>
-                      <div class="form-group">
-                        <?php echo form_input(array('name' => 'buy_name', 'id' => 'buy_name', 'value' => set_value('buy_name'), 'maxlength' => '24', 'placeholder' => 'Nombre Completo', 'class' => 'form-control input-lg')); ?>
-                      </div>
-                      <div class="form-group">
-                         <?php echo form_input(array('name' => 'buy_email', 'id' => 'buy_email', 'value' => set_value('buy_email'), 'maxlength' => '24', 'placeholder' => 'Correo Electrónico', 'class' => 'form-control input-lg')); ?>
-                      </div> 
-                        <div class="checkboxes">
-                          <label class="label_check" for="checkbox-01">
-                            <input id="checkbox-01" type="checkbox" checked="" value="1" name="sample-checkbox-01"></input>
-                             Acepto los <a href="index.php/tienda/condiciones">términos y condiciones de compra</a>.
-                        </label>
-                      </div>
-
-                      <div class="col-md-12 text-center mmargin">
-                        <?php $attributes = 'class = "btn btn-action btn-generar"'; echo form_submit('submit', 'Generar código de compra', $attributes); ?>
-                      </div>
-                    </form>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam repudiandae similique consequatur voluptate nisi iure totam earum ducimus asperiores accusantium quis ab eos aliquid suscipit, officia, error ipsam porro atque.</p>
-                </div>
-            </div>
-        </div>    
-    </section>
-
-    <!-- Download Section -->
-    <section id="cart-end" class="content-section text-center pattern">
-        <div class="cart-end-section">
-            <div class="container">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <h3 class="sec-heading">Código de compra</h3>
-                    <h2 class="heading">123456789012345678</h2>
-                    <div class="col-md-8 col-md-offset-2 description-sale"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis aliquam, ea illum in molestiae, quasi ipsa necessitatibus quo explicabo deserunt sit alias voluptas facilis libero earum adipisci sint, tempora dolores.</div>
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <!-- <section id="contact" class="container content-section text-center">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <h3>código</h3>
-                <h2>Contact Start Bootstrap</h2>
-                <p>Feel free to email us to provide some feedback on our templates, give us suggestions for new templates and themes, or to just say hello!</p>
-                <p><a href="mailto:feedback@startbootstrap.com">feedback@startbootstrap.com</a>
-                </p>
-                <ul class="list-inline banner-social-buttons">
-                    <li>
-                        <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
-                    </li>
-                    <li>
-                        <a href="https://plus.google.com/+Startbootstrap/posts" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section> -->
-
-    <!-- Map Section -->
-  <!--   <div id="map"></div> -->
+    
 
   <!-- Modal Producto 1 -->
     <div class="modal fade" id="producto1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -556,6 +452,48 @@
       </div>
     </div>
 
+    <!-- Modal Condiciones Favooru -->
+    <div class="modal fade" id="conditions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header modal-header-custom">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">Condiciones Generales de compra FAVOORU</h4>
+          </div>
+          <div class="row content-section-details">
+              <div class="col-md-12 modal-text">
+                <h2 class="modal-title">Condiciones Generales de compra FAVOORU</h2>
+                <p>Antes de obtener tu código de compra, te recomendamos leas las siguientes indicaciones.
+                              <ol class="conditions">
+                                <li>
+                                  Una vez obtengas tu código de compra, deberas de acercarte  a cualquier agente TIGO MONEY (acorde al mapa y/o listado presentado en este sitio), y llevar contigo el código; el mismo, puedes imprimirlo, tomarle una foto con tu celular, o llevarlo anotado en una hoja de papel (cuida de escribir puntualmente cada numero). Deberás también llevar tu DUI, y en caso no poseas DUI por ser menor de edad ó por haberlo extraviado, deberás de acompañarte de alguien que si tenga DUI VIGENTE.
+                                </li>
+                                <li>
+                                  El agente TIGO MONEY, introducirá ese código en el sistema, y te solicitará hagas efectivo el pago acorde al valor del producto.
+                                </li>
+                                <li>
+                                  Una vez realizado el pago, recibirás una confirmación del mismo.
+                                </li>
+                                <li>
+                                  En un período de 5 a 24 horas, recibirás en el mismo correo electrónico que ingresaste para obtener tu código de compra de FAVOORU, el usuario y contraseña para acceder al producto adquirido.
+                                </li>
+                                <li>
+                                  Deberás de revisar en tu bandeja de entrada, o bandeja de SPAM, nuestro correo con el usuario y contraseña del producto que adquiriste.
+                                </li>
+                                <li>
+                                  Algunos de nuestros productos (con el fin de evitar el plagio de los mismos), tienen ingresos limitados, es decir, posiblemente puedas ingresar solamente 10 veces para leer o disfrutar del mismo.
+                                </li>
+                                <li>
+                                  Para cualquier consulta en temas de compra o de nuestros productos, escribanos a: favooru@mentesinteligentes.com y nos pondremos en contacto contigo, en un período de 48 a 72 horas.
+                                </li>
+                              </ol>
+                            </p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
 
     <!-- Footer -->
@@ -589,6 +527,15 @@
         $('#top').hide();
         $('#cart-data').hide();
         $('#cart-end').hide();
+
+        $(function(){
+          $('.step').hover(function(){
+            $(this).addClass('animated pulse');
+            $(this).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',  function() {
+                $(this).removeClass('animated pulse');
+             });
+          });
+        });
     });
     
 

@@ -15,12 +15,20 @@ $(window).scroll(function() {
 
 // jQuery for page scrolling feature - requires jQuery Easing plugin
 $(function() {
-    $('a.page-scroll').bind('click', function(event) {
-        //$.scrollLock( false ); 
+    $('a.cart-scroll').bind('click', function(event) {
         var $anchor = $(this);
-        var $section = $anchor.closest('section').attr('id');
+        var $section = "#" + $anchor.closest('section').attr('id');
         $($anchor.attr('href')).show();
-        //if ($anchor.hasClass('adtocart')) {show_all();};
+        $('html, body').stop().animate({
+            scrollTop: $($anchor.attr('href')).offset().top
+        }, 1500, 'easeInOutExpo', function(){$($section).hide();$($anchor).css("padding-top","60");});
+        event.preventDefault();
+    });
+});
+$(function() {
+    $('a.page-scroll').bind('click', function(event) {
+        var $anchor = $(this);
+        $($anchor.attr('href')).show();
         $('html, body').stop().animate({
             scrollTop: $($anchor.attr('href')).offset().top
         }, 1500, 'easeInOutExpo');
@@ -30,12 +38,21 @@ $(function() {
 
 $(function() {
     $('a.home').bind('click', function(event) {
-        //$.scrollLock( false ); 
+        var $anchor = $(this);
+        $('html, body').stop().animate({
+            scrollTop: $($anchor.attr('href')).offset().top
+        }, 1500, 'easeInOutExpo', function() {hide_cart();});
+        event.preventDefault();
+    });
+});
+
+$(function() {
+    $('a.adtocart').bind('click', function(event) {
         var $anchor = $(this);
         $($anchor.attr('href')).show();
         $('html, body').stop().animate({
             scrollTop: $($anchor.attr('href')).offset().top
-        }, 1500, 'easeInOutExpo', function() {hide_cart();});
+        }, 1500, 'easeInOutExpo', function() {hide_home();});
         event.preventDefault();
     });
 });
@@ -46,10 +63,16 @@ function hide_cart(){
     $('#cart-end').hide();
 }
 
-function show_all(){
-    $('#top').show();
-    $('#cart-data').show();
-    $('#cart-end').show();
+function hide_home(){
+    $('#info').hide();
+    $('#how-to').hide();
+    $('#catalog').hide();
+}
+
+function show_home(){
+    $('#info').show();
+    $('#how-to').show();
+    $('#catalog').show();
 }
 
 // $(function() {
@@ -98,13 +121,12 @@ $(function() {
              $('#form-error').html(data.msg);
             }
             if(data.errors == 0)
-            {
+            {   
                $('#form-error').hide();
-               $.scrollLock( false ); 
-                var $anchor = '#cart-end';
+                $('#cart-end').show();
                 $('html, body').stop().animate({
-                    scrollTop: $($anchor).offset().top
-                }, 1500, 'easeInOutExpo', function() {relock();});
+                    scrollTop: $('#cart-end').offset().top
+                }, 1500, 'easeInOutExpo');
                 event.preventDefault();
             }        
         }, 'json');

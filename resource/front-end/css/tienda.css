@@ -113,7 +113,7 @@ a:focus {
         border-bottom: 0;
         letter-spacing: 1px;
         background: #FFF;
-        border-bottom: 2px #C2C2C2 solid;
+        border-bottom: 1px #C2C2C2 solid;
         -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
         -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
         transition: background .5s ease-in-out,padding .5s ease-in-out;
@@ -125,7 +125,7 @@ a:focus {
     }
 
     .navbar-custom.top-nav-collapse {
-        border-bottom: 1px solid rgb(128,128,128, .3) ;
+        border-bottom: 1px solid #D4D4D4;
     }
 }
 
@@ -286,6 +286,8 @@ a:focus {
     }
     .content-section-details {
         padding: 35px;
+        overflow: auto;
+        max-height: 600px;
     }
    
 }
@@ -413,6 +415,11 @@ body {
     padding: 10px 50px;
     font-size: 16px;
 }
+.btn-action-big{
+    border: medium solid #FFF;
+    padding: 10px 60px;
+    font-size: 20px;
+}
 
 .btn-action.btn-comprar{
     color: #FFF;
@@ -420,6 +427,14 @@ body {
 }
 .btn-action.btn-comprar:hover{
     color: #2DBE97;
+    background: none repeat scroll 0% 0% #FFF;
+}
+.btn-action-big.btn-call{
+    color: #FFF;
+    background: none repeat scroll 0% 0% #25A8DE;
+}
+.btn-action-big.btn-call:hover{
+    color: #25A8DE;
     background: none repeat scroll 0% 0% #FFF;
 }
 
@@ -430,18 +445,32 @@ body {
 .btn-action.btn-generar:hover{
     color: #25A8DE;
     background: none repeat scroll 0% 0% #FFF;
+    border: solid #25A8DE;
 }
 .heading{
     font-size: 60px;
     text-transform: uppercase;
 }
 #cart-data{
-    background: none repeat scroll 0% 0% #25A8DE;
+    /*background: none repeat scroll 0% 0% #25A8DE;*/
+    background: none repeat scroll 0% 0% #FFF;
+    color: #656565;
     height: 100%;
 }
 #cart-end{
     background: none repeat scroll 0% 0% #E37568;
     height: 100%;
+}
+#affiliate-data{
+    background: none repeat scroll 0% 0% #7E7E7E;
+    height: 100%;
+}
+#affiliate-end{
+    background: none repeat scroll 0% 0% #E37568;
+    height: 100%;
+}
+#affiliate-end a{
+    color:green;
 }
 .guide{
     color: #FFCC33;
@@ -449,6 +478,13 @@ body {
 }
 .guide:hover{
     color: #E0E0E0;
+}
+.guide.blue{
+    color: #219AB3;
+    font-size: 18px;
+}
+.guide:hover{
+    color: #219AB3;
 }
 .icon-big{
     font-size: 35px;
@@ -465,6 +501,7 @@ body {
 }
 .margin{
     margin-bottom: 10px;
+    display: inline-block;
 }
 .description-text{
     margin: 0 0 15px!important;
@@ -476,6 +513,11 @@ body {
     font-size: 45px;
     color:#58595B;
     padding-bottom: 20px;
+}
+.sec-heading.affiliate-section{
+    font-size: 45px;
+    color:#58595B;
+    padding-bottom: 5px;
 }
 .description-sale{
     text-align: left;
@@ -649,6 +691,7 @@ p.icon-steps{
 .pattern-home{
     background-image: url('../img/pattern_top.png')!important;
     background-repeat: repeat!important;
+    background-attachment: fixed;
 }
 .modal-header-custom{
     background-color: #ED645C;
@@ -721,6 +764,7 @@ a:hover.terms {
 .label_check,
 .label_radio {
     padding-left: 34px;
+    font-size: 16px;
 }
 
 .label_radio {
@@ -743,4 +787,41 @@ label.r_on {
 .label_radio input {
     position: absolute;
     left: -9999px;
+}
+.focus{
+    width: 154px;
+    height: 154px;
+    margin: 0 auto;
+
+}
+.focus:hover {
+  border: 3px solid #8C8C8C;
+  border-radius: 50%;
+}
+
+/*Estilos de Afiliado*/
+
+.info-affiliate {
+    padding: 0px;
+    background-color: #Cf4945;
+}
+.about-affiliate{
+    color: #8C8C8C;
+    font-size: 20px !important;
+    padding: 40px 0;
+}
+ul.no-style{
+    list-style: none;
+    padding: 10px 0px;
+}
+.call-to-action{
+    padding: 20px;
+    background-color: #FB7571;
+    font-size: 30px;
+}
+.custom-link.dark{
+    color:#FC3;
+}
+.custom-link.light{
+    color:#219AB3;
 }
