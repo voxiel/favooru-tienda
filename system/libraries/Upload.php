@@ -130,7 +130,9 @@ class CI_Upload {
 
 		// if a file_name was provided in the config, use it instead of the user input
 		// supplied file name for all uploads until initialized again
+		//$myfile = (string)date('Y_m_d_H_i_s');
 		$this->_file_name_override = $this->file_name;
+		//$this->_file_name_override = $myfile;
 	}
 
 	// --------------------------------------------------------------------
@@ -192,7 +194,7 @@ class CI_Upload {
 			return FALSE;
 		}
 
-
+		$mydate = (string) date('Y-m-d');
 		// Set the uploaded data as class variables
 		$this->file_temp = $_FILES[$field]['tmp_name'];
 		$this->file_size = $_FILES[$field]['size'];

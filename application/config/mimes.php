@@ -11,7 +11,8 @@
 $mimes = array(
 	'hqx' => 'application/mac-binhex40',
 	'cpt' => 'application/mac-compactpro',
-	'csv' => array(
+	'csv' => 'text/plain',
+	/*'csv' => array(
 		'text/x-comma-separated-values',
 		'text/comma-separated-values',
 		'application/octet-stream',
@@ -20,7 +21,7 @@ $mimes = array(
 		'text/csv',
 		'application/csv',
 		'application/excel',
-		'application/vnd.msexcel'),
+		'application/vnd.msexcel'),*/
 	'bin' => 'application/macbinary',
 	'dms' => 'application/octet-stream',
 	'lha' => 'application/octet-stream',

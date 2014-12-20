@@ -8,8 +8,7 @@ class Account_model extends CI_Model {
 	 * @access public
 	 * @return object all accounts
 	 */
-	function get()
-	{
+	function get(){
 		return $this->db->get('a3m_account')->result();
 	}
 
@@ -20,8 +19,7 @@ class Account_model extends CI_Model {
 	 * @return object products object
 	 */
 
-	public function get_productos() 
-	{
+	public function get_productos(){
 	    return $this->db->get('favooru_producto')->result();
 	}
 
@@ -34,8 +32,7 @@ class Account_model extends CI_Model {
 	 * @param string $product_id
 	 * @return object account object
 	 */
-	function get_product_by_id($product_id)
-	{
+	function get_product_by_id($product_id){
 		return $this->db->get_where('favooru_producto', array('producto_id' => $product_id))->row();
 	}
 
@@ -47,8 +44,7 @@ class Account_model extends CI_Model {
 	 * @access public
 	 * @return object account object
 	 */
-	function get_clientes()
-	{
+	function get_clientes(){
 		return $this->db->get('favooru_clientes')->result();
 	}
 
@@ -60,8 +56,7 @@ class Account_model extends CI_Model {
 	 * @access public
 	 * @return object afiliados object
 	 */
-	function get_afiliados()
-	{
+	function get_afiliados(){
 		return $this->db->get('favooru_afiliados')->result();
 	}
 
@@ -73,8 +68,7 @@ class Account_model extends CI_Model {
 	 * @access public
 	 * @return object pedidos object
 	 */
-	function get_pedidos()
-	{
+	function get_pedidos(){
 		$this->db->select('favooru_pedidos.pedidos_id, favooru_clientes.cliente_nombres, favooru_clientes.cliente_apellidos, favooru_producto.producto_descripcion, favooru_producto.producto_precio, favooru_pedidos.pedidos_codigo, favooru_pedidos.pedido_fecha, favooru_afiliados.afiliados_nombre, favooru_pedidos.pedido_estado,');
 		$this->db->from('favooru_pedidos');
 		$this->db->join('favooru_clientes', 'favooru_pedidos.pedidos_cliente_id = favooru_clientes.cliente_id');
@@ -339,8 +333,167 @@ class Account_model extends CI_Model {
 		$this->db->update('a3m_account', array('suspendedon' => NULL), array('id' => $account_id));
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * count password available
+	 *
+	 * @access public
+	 * @return object count password
+	 */
+	function count_passwords_available_by_product()
+	{
+		$passwords_available = array();
+		$all_products = $this->get_productos();
+		foreach ($all_products as $index => $product) {
+			$this->db->where('accesos_producto_id', $product->producto_id); 
+			$this->db->where('accesos_disponibilidad', 1); 
+			$this->db->from('favooru_accesos');
+		 	$count_password = $this->db->count_all_results();
+		 	array_push($passwords_available, $count_password);
+		 	array_push($passwords_available, $product->producto_descripcion);
+		}
+		//return an array with the amount passwords available by product
+		return $passwords_available;
+
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * return passwords available
+	 *
+	 * @access public
+	 * @return object count password
+	 */
+	function pending_orders(){
+		$this->db->select('ordenes_codigo_transaccion');
+		$this->db->where('ordenes_disponibilidad', 1); //true
+		$query = $this->db->get('favooru_ordenes');
+
+		$pending_orders = array();
+		foreach ($query->result() as $row)
+		{
+		    array_push($pending_orders, $row->ordenes_codigo_transaccion);
+		}
+		return $pending_orders;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * update orders
+	 *
+	 * @access public
+	 * @return object count password
+	 */
+	function process_orders($codTransaccion){
+
+		$data = array('ordenes_disponibilidad' => 0);
+		$this->db->where('ordenes_codigo_transaccion', $codTransaccion); 
+		$this->db->update('favooru_ordenes', $data);
+
+		return ($this->db->affected_rows() > 0);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * insert access
+	 *
+	 * @access public
+	 * @return object insert access
+	 */
+	function insert_access($codProducto, $user, $pass){
+
+		$data = array(
+		   'accesos_usuario' => $user ,
+		   'accesos_pass' => $pass ,
+		   'accesos_producto_id' => $codProducto
+		);
+
+		$this->db->insert('favooru_accesos', $data); 
+
+		return ($this->db->affected_rows() > 0);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * get id access
+	 *
+	 * @access public
+	 * @return object get id access
+	 */
+	function get_id_access($codProducto){
+		$this->db->select('accesos_id, accesos_usuario, accesos_pass');
+		$this->db->where('accesos_disponibilidad', 1); 
+		$this->db->where('accesos_producto_id', $codProducto); 
+		$query = $this->db->get('favooru_accesos', 1, 0 ); //solo sacamos 1 elemento (limit = 1) 
+		return $query->result();
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * get email
+	 *
+	 * @access public
+	 * @return object get email
+	 */
+	function get_email($codTransaccion, $accesoId){
+		$this->db->select('ordenes_id');
+		$this->db->where('ordenes_id_accesos', $accesoId); 
+		$this->db->where('ordenes_codigo_transaccion', $codTransaccion); 
+		$query = $this->db->get('favooru_ordenes', 1, 0 ); //solo sacamos 1 elemento (limit = 1) 
+		$row = $query->result();
+
+		$this->db->select('cliente_nombres, cliente_apellidos, cliente_correo, pedidos_id_ordenes');
+		$this->db->from('favooru_clientes'); 
+		$this->db->join('favooru_pedidos','pedidos_cliente_id = cliente_id'); 
+		$this->db->where('pedidos_id_ordenes', $row[0]->{'ordenes_id'});
+
+		$query = $this->db->get();
+		if($this->db->affected_rows() > 0){
+			return $query->result();
+		}else {
+			return array();
+		}
+
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * update access
+	 *
+	 * @access public
+	 * @return object get id access
+	 */
+	function update_access($accesos_id, $codTransaccion){
+
+		$data = array(
+	               'accesos_disponibilidad' => 0
+	            );
+
+		$this->db->where('accesos_id', $accesos_id);
+		$this->db->update('favooru_accesos', $data); 	
+
+		/***************************************************/
+
+		$data = array(
+	               'ordenes_id_accesos' => $accesos_id
+	            );
+
+		$this->db->where('ordenes_codigo_transaccion', $codTransaccion);
+		$this->db->update('favooru_ordenes', $data); 	
+	
+	}
+	
 }
 
 
 /* End of file account_model.php */
 /* Location: ./application/account/models/account_model.php */
+
+//Pendiente lo de la seleccion de contraseñas por N° de producto

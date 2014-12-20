@@ -14,11 +14,13 @@
 <link href="<?php echo base_url().RES_DIR; ?>/css/bootstrap-table.css" rel="stylesheet">
 <link href="<?php echo base_url().RES_DIR; ?>/css/upload/style.css" rel="stylesheet">
 <link href="<?php echo base_url().RES_DIR; ?>/css/upload/jquery.fileupload.css" rel="stylesheet">
+<link href="<?php echo base_url().RES_DIR; ?>/css/jquery.spin.css" rel="stylesheet">
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <link href="<?php echo base_url().RES_DIR; ?>/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 <script src="<?php echo base_url().RES_DIR; ?>/bootstrap/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url().RES_DIR; ?>/js/bootstrap-table.js"></script>
+<script src="<?php echo base_url().RES_DIR; ?>/js/jquery.spin.js"></script>
 
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->

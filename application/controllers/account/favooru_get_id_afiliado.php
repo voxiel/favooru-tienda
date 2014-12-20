@@ -2,7 +2,7 @@
 /*
  * Manage_users Controller
  */
-class favooru_upload extends CI_Controller {
+class favooru_get_id_afiliado extends CI_Controller {
 
   /**
    * Constructor
@@ -46,8 +46,27 @@ class favooru_upload extends CI_Controller {
     $all_accounts = $this->account_model->get_clientes();
 
 
+    /******************************************************************************************/
+
+      $url = parse_url($_SERVER['REQUEST_URI']);
+      parse_str($url['query'], $params); //recibe todos los parametros de la url incluyendo la clave y el valor
+                                         // array(1) { ["id_afiliado"]=> string(1) "2" }
+
+      $data['id_afiliado'] = $params['id_afiliado'];
+      
+
+    /******************************************************************************************/
+
+
+
+
+
+
     // Load manage users view
-    $this->load->view('account/favooru_upload', $data);
+    $this->load->view('account/favooru_get_id_afiliado', $data);
+
+
+
     
   }
 

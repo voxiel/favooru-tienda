@@ -2,7 +2,7 @@
 /*
  * Manage_users Controller
  */
-class favooru_upload extends CI_Controller {
+class favooru_upload_access extends CI_Controller {
 
   /**
    * Constructor
@@ -47,7 +47,7 @@ class favooru_upload extends CI_Controller {
 
 
     // Load manage users view
-    $this->load->view('account/favooru_upload', $data);
+    $this->load->view('account/favooru_upload_access', $data);
     
   }
 
