@@ -63,12 +63,15 @@ $(function() {
               }
 
               if(data.errors == 0){   
+
                 $('#form-error').hide();
                 $($anchor.attr('href')).show();
                 $('html, body').stop().animate({
                     scrollTop: $($anchor.attr('href')).offset().top
                 }, 1500, 'easeInOutExpo');
                 event.preventDefault();
+
+                $('.affiliate_id').html('http://www.favooru.com/tienda?id_afiliado='+data.id);
               }        
             }, 'json')
             .done( function(data){

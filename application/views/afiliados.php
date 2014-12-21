@@ -158,22 +158,22 @@
                  <?php echo form_open('afiliados/save_affiliate_data', array('id'=>'affiliate-form')); ?>
                     <div class="alert alert-danger" role="alert" id="form-error"></div>
                       <div class="form-group">
-                        <?php echo form_input(array('name' => 'buy_name', 'id' => 'buy_name', 'value' => set_value('buy_name'), 'maxlength' => '24', 'placeholder' => 'Nombre Completo', 'class' => 'form-control input-lg')); ?>
+                        <?php echo form_input(array('name' => 'buy_name', 'id' => 'buy_name', 'value' => set_value('buy_name'), 'maxlength' => '50', 'placeholder' => 'Nombre Completo', 'class' => 'form-control input-lg')); ?>
                       </div>
                       <div class="form-group">
-                         <?php echo form_input(array('name' => 'buy_email', 'id' => 'buy_email', 'value' => set_value('buy_email'), 'maxlength' => '24', 'placeholder' => 'Correo Electrónico', 'class' => 'form-control input-lg', 'pattern'=>'^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$')); ?>
+                         <?php echo form_input(array('name' => 'buy_email', 'id' => 'buy_email', 'value' => set_value('buy_email'), 'maxlength' => '30', 'placeholder' => 'Correo Electrónico', 'class' => 'form-control input-lg')); ?>
                       </div> 
                        <div class="form-group">
-                         <?php echo form_input(array('name' => 'buy_address', 'id' => 'buy_address', 'value' => set_value('buy_address'), 'maxlength' => '24', 'placeholder' => 'Dirección', 'class' => 'form-control input-lg')); ?>
+                         <?php echo form_input(array('name' => 'buy_address', 'id' => 'buy_address', 'value' => set_value('buy_address'), 'maxlength' => '50', 'placeholder' => 'Dirección', 'class' => 'form-control input-lg')); ?>
                       </div> 
                        <div class="form-group">
-                         <?php echo form_input(array('name' => 'buy_phone', 'id' => 'buy_phone', 'value' => set_value('buy_phone'), 'maxlength' => '24', 'placeholder' => 'Teléfono', 'class' => 'form-control input-lg')); ?>
+                         <?php echo form_input(array('name' => 'buy_phone', 'id' => 'buy_phone', 'value' => set_value('buy_phone'), 'maxlength' => '15', 'placeholder' => 'Teléfono', 'class' => 'form-control input-lg')); ?>
                       </div> 
                        <div class="form-group">
-                         <?php echo form_input(array('name' => 'buy_dui', 'id' => 'buy_dui', 'value' => set_value('buy_dui'), 'maxlength' => '24', 'placeholder' => 'DUI', 'class' => 'form-control input-lg')); ?>
+                         <?php echo form_input(array('name' => 'buy_dui', 'id' => 'buy_dui', 'value' => set_value('buy_dui'), 'maxlength' => '10', 'placeholder' => 'DUI', 'class' => 'form-control input-lg')); ?>
                       </div> 
                        <div class="form-group">
-                         <?php echo form_input(array('name' => 'buy_bith_date', 'id' => 'buy_bith_date', 'value' => set_value('buy_bith_date'), 'maxlength' => '24', 'placeholder' => 'Fecha de Nacimiento', 'class' => 'form-control input-lg')); ?>
+                         <?php echo form_input(array('name' => 'buy_birth_date', 'id' => 'buy_birth_date', 'value' => set_value('buy_bith_date'), 'maxlength' => '10', 'placeholder' => 'Fecha de Nacimiento', 'class' => 'form-control input-lg', 'type' => 'date')); ?>
                       </div> 
                     
                         
@@ -203,7 +203,7 @@
                 <div class="col-lg-8 col-lg-offset-2">
                     <h3 class="sec-heading">¡Bienvenido a FavoorU Afiliados!</h3>
                     <h3>Tu código de afiliado es:</h3>
-                    <h2 class="heading">http://www.favooru.com/tienda/1</h2>
+                    <h2 class="heading affiliate_id"></h2>
                     <div class="col-md-8 col-md-offset-2 description-sale"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis aliquam, ea illum in molestiae, quasi ipsa necessitatibus quo explicabo deserunt sit alias voluptas facilis libero earum adipisci sint, tempora dolores.</div>
                     
                 </div>

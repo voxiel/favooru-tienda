@@ -489,6 +489,37 @@ class Account_model extends CI_Model {
 		$this->db->update('favooru_ordenes', $data); 	
 	
 	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * insert affiliate
+	 *
+	 * @access public
+	 * @return object get id access
+	 */
+	function insert_affiliate($affiliate_data){
+
+		$data = array(
+	               'afiliados_nombre' => $affiliate_data['buy_name'],
+	               'afiliados_correo' => $affiliate_data['buy_email'],
+	               'afiliados_direccion' => $affiliate_data['buy_address'],
+	               'afiliados_telefono' => $affiliate_data['buy_phone'],
+	               'afiliados_dui' => $affiliate_data['buy_dui'],
+	               'afiliados_fecha_nac' => $affiliate_data['buy_birth_date']
+	            );
+
+		$this->db->insert('favooru_afiliados', $data);
+
+		$this->db->select('afiliados_id');
+		$this->db->order_by('afiliados_id', 'desc');
+		$query = $this->db->get('favooru_afiliados', 1, 0 ); //solo sacamos 1 elemento (limit = 1) 
+		$row = $query->result(); 	
+
+		return $row[0]->{'afiliados_id'};
+
+		
+	}
 	
 }
 
@@ -496,4 +527,3 @@ class Account_model extends CI_Model {
 /* End of file account_model.php */
 /* Location: ./application/account/models/account_model.php */
 
-//Pendiente lo de la seleccion de contraseñas por N° de producto
