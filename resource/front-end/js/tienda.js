@@ -25,6 +25,7 @@ $(function() {
         event.preventDefault();
     });
 });
+
 $(function() {
     $('a.page-scroll').bind('click', function(event) {
         var $anchor = $(this);
@@ -33,6 +34,56 @@ $(function() {
             scrollTop: $($anchor.attr('href')).offset().top
         }, 1500, 'easeInOutExpo');
         event.preventDefault();
+    });
+});
+
+
+$(function() {
+    $('a.btn-form-affiliate').bind('click', function(event) {
+        var $anchor = $(this);
+        /*
+        $($anchor.attr('href')).show();
+        $('html, body').stop().animate({
+            scrollTop: $($anchor.attr('href')).offset().top
+        }, 1500, 'easeInOutExpo');
+        */
+        //event.preventDefault();    
+
+        //$('#affiliate-form').submit(function(event) {
+            //event.preventDefault();
+
+            console.log($('#affiliate-form').serialize());
+
+            $.post($('#affiliate-form').attr('action'), $('#affiliate-form').serialize(), function( data ) {
+              console.log('entra carajo');
+
+              if(data.st == 0){
+                   $('#form-error').show();
+                   $('#form-error').html(data.msg);
+              }
+
+              if(data.errors == 0){   
+                $('#form-error').hide();
+                $($anchor.attr('href')).show();
+                $('html, body').stop().animate({
+                    scrollTop: $($anchor.attr('href')).offset().top
+                }, 1500, 'easeInOutExpo');
+                event.preventDefault();
+              }        
+            }, 'json')
+            .done( function(data){
+                console.log('done');
+                console.log(data)
+            })
+            .fail( function(data){
+                console.log('fail');
+                console.log(data)
+            });
+
+            return false;           
+
+        //});//del submit 
+
     });
 });
 

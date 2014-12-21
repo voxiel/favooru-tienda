@@ -155,37 +155,38 @@
                       </a>  
                     
                     <p class="description-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam repudiandae similique consequatur voluptate nisi iure totam earum ducimus asperiores accusantium quis ab eos aliquid suscipit, officia, error ipsam porro atque.</p>
-                 <?php echo form_open('', array('id'=>'buy-form')); ?>
+                 <?php echo form_open('afiliados/save_affiliate_data', array('id'=>'affiliate-form')); ?>
                     <div class="alert alert-danger" role="alert" id="form-error"></div>
                       <div class="form-group">
                         <?php echo form_input(array('name' => 'buy_name', 'id' => 'buy_name', 'value' => set_value('buy_name'), 'maxlength' => '24', 'placeholder' => 'Nombre Completo', 'class' => 'form-control input-lg')); ?>
                       </div>
                       <div class="form-group">
-                         <?php echo form_input(array('name' => 'buy_email', 'id' => 'buy_email', 'value' => set_value('buy_email'), 'maxlength' => '24', 'placeholder' => 'Correo Electrónico', 'class' => 'form-control input-lg')); ?>
+                         <?php echo form_input(array('name' => 'buy_email', 'id' => 'buy_email', 'value' => set_value('buy_email'), 'maxlength' => '24', 'placeholder' => 'Correo Electrónico', 'class' => 'form-control input-lg', 'pattern'=>'^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$')); ?>
                       </div> 
                        <div class="form-group">
-                         <?php echo form_input(array('name' => 'buy_email', 'id' => 'buy_email', 'value' => set_value('buy_email'), 'maxlength' => '24', 'placeholder' => 'Dirección', 'class' => 'form-control input-lg')); ?>
+                         <?php echo form_input(array('name' => 'buy_address', 'id' => 'buy_address', 'value' => set_value('buy_address'), 'maxlength' => '24', 'placeholder' => 'Dirección', 'class' => 'form-control input-lg')); ?>
                       </div> 
                        <div class="form-group">
-                         <?php echo form_input(array('name' => 'buy_email', 'id' => 'buy_email', 'value' => set_value('buy_email'), 'maxlength' => '24', 'placeholder' => 'Teléfono', 'class' => 'form-control input-lg')); ?>
+                         <?php echo form_input(array('name' => 'buy_phone', 'id' => 'buy_phone', 'value' => set_value('buy_phone'), 'maxlength' => '24', 'placeholder' => 'Teléfono', 'class' => 'form-control input-lg')); ?>
                       </div> 
                        <div class="form-group">
-                         <?php echo form_input(array('name' => 'buy_email', 'id' => 'buy_email', 'value' => set_value('buy_email'), 'maxlength' => '24', 'placeholder' => 'DUI', 'class' => 'form-control input-lg')); ?>
+                         <?php echo form_input(array('name' => 'buy_dui', 'id' => 'buy_dui', 'value' => set_value('buy_dui'), 'maxlength' => '24', 'placeholder' => 'DUI', 'class' => 'form-control input-lg')); ?>
                       </div> 
                        <div class="form-group">
-                         <?php echo form_input(array('name' => 'buy_email', 'id' => 'buy_email', 'value' => set_value('buy_email'), 'maxlength' => '24', 'placeholder' => 'Fecha de Nacimiento', 'class' => 'form-control input-lg')); ?>
+                         <?php echo form_input(array('name' => 'buy_bith_date', 'id' => 'buy_bith_date', 'value' => set_value('buy_bith_date'), 'maxlength' => '24', 'placeholder' => 'Fecha de Nacimiento', 'class' => 'form-control input-lg')); ?>
                       </div> 
                     
-                        <div class="checkboxes">
+                        
+                      <div class="checkboxes">
                           <label class="label_check" for="checkbox-01">
-                            <input id="checkbox-01" type="checkbox" checked="" value="1" name="sample-checkbox-01"></input>
+                            <input id="checkbox-01" type="checkbox" checked="true" value="1"></input>
                              Acepto los <a href="#" data-toggle="modal" data-target="#conditions" class="custom-link">términos y condiciones de afiliación</a>.
                         </label>
                       </div>
 
                       <div class="col-md-12 text-center mmargin">
-                        <?php //$attributes = 'class = "btn btn-action btn-generar" id = "generar-afiliado"'; echo form_submit('submit', 'Generar código de afiliado', $attributes); ?>
-                         <a href="#affiliate-end" class="btn btn-action-big btn-call page-scroll">Generar código de afiliado</a>
+                        <?php //$attributes = 'class = "btn btn-action btn-generar btn-form-affiliate" id = "generar-afiliado"'; echo form_submit('submit', 'Generar código de afiliado', $attributes); ?>
+                        <a href="#affiliate-end" class="btn btn-action-big btn-call btn-form-affiliate">Generar código de afiliado</a>
                       </div>
                     </form>
 
@@ -434,6 +435,21 @@
         $('#affiliate-data').hide();
         $('#affiliate-end').hide();
 
+
+        $(function(){
+
+            $('.btn-form-affiliate').on('click', function(){
+              
+            });
+
+        });
+
+        $(function() {
+            $('#affiliate-form').bind('submit', function(event) {
+            });
+        });
+
+
         $(function(){
           $('.step').hover(function(){
             $(this).addClass('animated pulse');
@@ -445,10 +461,7 @@
               $('#affiliate-data').show();
               event.preventDefault();
           });
-          $('#generar-afiliado').bind('click', function(event) {
-              $('#affiliate-end').show();
-              event.preventDefault();
-          });
+
         });
     });
     
