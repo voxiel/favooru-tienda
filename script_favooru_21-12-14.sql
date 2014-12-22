@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 20-11-2014 a las 15:39:04
+-- Tiempo de generación: 21-12-2014 a las 17:05:09
 -- Versión del servidor: 5.5.33-1
 -- Versión de PHP: 5.5.6-1
 
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `a3m_account` (
 --
 
 INSERT INTO `a3m_account` (`id`, `username`, `email`, `password`, `createdon`, `verifiedon`, `lastsignedinon`, `resetsenton`, `deletedon`, `suspendedon`) VALUES
-(1, 'admin', 'admin@admin.com', '$2a$08$doG0Z4yv9apTu.SqyWneZ.lgHTUzIMMcE2mrmxg55t9P6Yy6KUH8O', '2014-09-19 05:12:47', NULL, '2014-11-20 15:07:21', NULL, NULL, NULL),
+(1, 'admin', 'admin@admin.com', '$2a$08$doG0Z4yv9apTu.SqyWneZ.lgHTUzIMMcE2mrmxg55t9P6Yy6KUH8O', '2014-09-19 05:12:47', NULL, '2014-12-20 01:22:58', NULL, NULL, NULL),
 (2, 'prueba', 'prueba@prueba.com', '$2a$08$019a21o0gG82FmbYpYvVPukbJ4znL5NgNyoRYEJbue9iyqTHqjVVq', '2014-09-21 03:09:20', NULL, '2014-09-23 17:42:49', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -248,11 +248,9 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('55ebf2ac579fb6a778b56669c70c70b5', '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.65 Safari/537.36', 1416370374, ''),
-('a0e749c6503e3cadc376c10c4dbab5d8', '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36', 1416253641, 'a:2:{s:9:"user_data";s:0:"";s:10:"account_id";s:1:"1";}'),
-('a4bf2fe6fa6bd1f64335a9a3267acf39', '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.65 Safari/537.36', 1416421451, 'a:2:{s:9:"user_data";s:0:"";s:10:"account_id";s:1:"1";}'),
-('d4f86e3503c04920cad319688003e81e', '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.65 Safari/537.36', 1416497642, 'a:2:{s:9:"user_data";s:0:"";s:10:"account_id";s:1:"1";}'),
-('db46f75421609dce50e697f13aa525d5', '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.65 Safari/537.36', 1416411435, 'a:2:{s:9:"user_data";s:0:"";s:10:"account_id";s:1:"1";}');
+('97da1b564b8acf628716444c916c5c80', '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36', 1419042703, 'a:2:{s:9:"user_data";s:0:"";s:10:"account_id";s:1:"1";}'),
+('ab83855945ef8199059ec6bd7b2df814', '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36', 1419028486, 'a:2:{s:9:"user_data";s:0:"";s:10:"account_id";s:1:"1";}'),
+('b623e35a7209e9484ee9c08873d1913e', '::1', 'Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X; en-us) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile', 1418926783, 'a:2:{s:9:"user_data";s:0:"";s:10:"account_id";s:1:"1";}');
 
 -- --------------------------------------------------------
 
@@ -5287,16 +5285,27 @@ CREATE TABLE IF NOT EXISTS `favooru_afiliados` (
 `afiliados_id` int(11) NOT NULL,
   `afiliados_nombre` varchar(100) NOT NULL,
   `afiliados_correo` varchar(100) NOT NULL,
+  `afiliados_direccion` varchar(70) NOT NULL,
+  `afiliados_telefono` varchar(15) NOT NULL,
+  `afiliados_dui` varchar(10) NOT NULL,
   `afiliados_fecha_nac` date NOT NULL,
   `afiliados_link_fb` varchar(200) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `favooru_afiliados`
 --
 
-INSERT INTO `favooru_afiliados` (`afiliados_id`, `afiliados_nombre`, `afiliados_correo`, `afiliados_fecha_nac`, `afiliados_link_fb`) VALUES
-(1, 'afiliado', 'a@a.com', '2014-09-02', 'fb.com');
+INSERT INTO `favooru_afiliados` (`afiliados_id`, `afiliados_nombre`, `afiliados_correo`, `afiliados_direccion`, `afiliados_telefono`, `afiliados_dui`, `afiliados_fecha_nac`, `afiliados_link_fb`) VALUES
+(1, 'Carlos Hernandez', 'charlie@xs.com', 'la casa de la esquina', '1234-1234', '1234567890', '0000-00-00', 'fb.com'),
+(2, 'Carlos Hernandez', 'charlie@xs.com', 'la casa de la esquina', '1234-1234', '1234567890', '0000-00-00', ''),
+(3, 'Carlos Hernandez', 'charlie@xs.com', 'la casa de la esquina 2', '8765-4321', '0987654321', '1990-07-14', ''),
+(4, 'Carlos Hernandez', 'charlie@xs.com', 'la casa de la esquina 2', '8765-4321', '0987654321', '1990-07-14', ''),
+(5, 'Carlos Hernandez', 'charlie@xs.com', 'la casa de la esquina 2', '8765-4321', '0987654321', '1990-07-14', ''),
+(6, 'Carlos Hernandez', 'charlie@xs.com', 'la casa de la esquina 2', '8765-4321', '0987654321', '1990-07-14', ''),
+(7, 'Carlos Hernandez', 'charlie@xs.com', 'la casa de la esquina 2', '8765-4321', '0987654321', '1990-07-14', ''),
+(8, 'Carlos Hernandez', 'xs@xs.com', 'la casa al lado de la casa de la niña juanita', '1234-4321', '0987654321', '1990-07-14', ''),
+(9, 'Carlos Hernandez', 'xs@xs.com', 'la casa verde', '1234-5678', '0192837465', '1990-07-14', '');
 
 -- --------------------------------------------------------
 
@@ -5316,8 +5325,8 @@ CREATE TABLE IF NOT EXISTS `favooru_clientes` (
 --
 
 INSERT INTO `favooru_clientes` (`cliente_id`, `cliente_nombres`, `cliente_apellidos`, `cliente_correo`) VALUES
-(1, 'Primer', '', 'Cliente'),
-(2, 'Chepe Trompo', '', 'chepe@trompo.com'),
+(1, 'Juan', 'Perez', 'Cliente@clientes.com'),
+(2, 'Jhon', 'Doe', 'chepe@trompo.com'),
 (3, 'sdafasdfasdf', '', 'v@a.com'),
 (4, 'Victor Montoya', '', 'algo@otracosa.com'),
 (5, 'Victor Montoya', '', 'v@a.com'),
@@ -5347,8 +5356,8 @@ CREATE TABLE IF NOT EXISTS `favooru_ordenes` (
 --
 
 INSERT INTO `favooru_ordenes` (`ordenes_id`, `ordenes_codigo_transaccion`, `ordenes_disponibilidad`, `ordenes_id_accesos`) VALUES
-(201, '574364280001006000', 0, 0),
-(202, '225372990002006000', 0, 0),
+(201, '574364280001006000', 1, 0),
+(202, '225372990002006000', 1, 0),
 (203, '237484840003006000', 1, 0),
 (204, '362746270004006000', 1, 0),
 (205, '973947890005006000', 1, 0),
@@ -5458,18 +5467,18 @@ CREATE TABLE IF NOT EXISTS `favooru_pedidos` (
 `pedidos_id` int(11) NOT NULL,
   `pedidos_cliente_id` int(5) NOT NULL,
   `pedidos_producto_id` int(5) NOT NULL,
-  `pedidos_codigo` varchar(20) NOT NULL,
+  `pedidos_id_ordenes` varchar(20) NOT NULL,
   `pedido_fecha` date NOT NULL,
-  `pedidos_afiliado_id` int(5) NOT NULL,
-  `pedido_estado` varchar(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `pedidos_afiliado_id` int(5) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `favooru_pedidos`
 --
 
-INSERT INTO `favooru_pedidos` (`pedidos_id`, `pedidos_cliente_id`, `pedidos_producto_id`, `pedidos_codigo`, `pedido_fecha`, `pedidos_afiliado_id`, `pedido_estado`) VALUES
-(1, 1, 1, '123456789012345678', '2014-09-02', 1, 'En proceso');
+INSERT INTO `favooru_pedidos` (`pedidos_id`, `pedidos_cliente_id`, `pedidos_producto_id`, `pedidos_id_ordenes`, `pedido_fecha`, `pedidos_afiliado_id`) VALUES
+(1, 1, 1, '201', '2014-09-02', 1),
+(2, 2, 1, '202', '2014-12-14', 1);
 
 -- --------------------------------------------------------
 
@@ -106578,7 +106587,7 @@ MODIFY `accesos_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=57006;
 -- AUTO_INCREMENT de la tabla `favooru_afiliados`
 --
 ALTER TABLE `favooru_afiliados`
-MODIFY `afiliados_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `afiliados_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `favooru_clientes`
 --
@@ -106593,7 +106602,7 @@ MODIFY `ordenes_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=301;
 -- AUTO_INCREMENT de la tabla `favooru_pedidos`
 --
 ALTER TABLE `favooru_pedidos`
-MODIFY `pedidos_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `pedidos_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `favooru_producto`
 --
